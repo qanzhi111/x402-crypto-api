@@ -74,3 +74,4 @@ At $0.01-$0.25 per call:
 ## License
 
 MIT
+// Auto-deployed on Railway with x402 Bazaar extension
