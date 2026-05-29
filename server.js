@@ -25,7 +25,8 @@ function x402PaymentRequired(config) {
       req.paymentAmount = config.amount;
       next();
     } else {
-      // Return 402 Payment Required with payment details
+      // Return 402 Payment Required with payment details + bazaar extension
+      const baseUrl = `https://spectacular-strength-production-0494.up.railway.app`;
       res.status(402).json({
         x402_version: 1,
         scheme: "exact",
@@ -42,6 +43,26 @@ function x402PaymentRequired(config) {
           amount: config.amount,
           recipient: config.address || WALLET_ADDRESS,
           expires_in: 3600
+        },
+        // x402 Bazaar extension for automatic service discovery
+        extensions: {
+          bazaar: {
+            name: "OnChain Shadow API",
+            description: "Crypto prices, Web3 security data, and on-chain investigation reports for AI Agents",
+            category: config.category || "finance",
+            tags: ["crypto", "web3", "security", "blockchain", "defi", "investigation"],
+            homepage: baseUrl,
+            endpoints: [
+              { path: "/api/crypto/price/:symbol", price: "$0.01", description: "Real-time crypto price" },
+              { path: "/api/crypto/market", price: "$0.02", description: "Market overview" },
+              { path: "/api/crypto/address/:address", price: "$0.05", description: "Address analysis" },
+              { path: "/api/security/token/:address", price: "$0.05", description: "Token security check" },
+              { path: "/api/security/contract/:address", price: "$0.10", description: "Contract risk analysis" },
+              { path: "/api/investigate/:address", price: "$0.25", description: "Full on-chain investigation" }
+            ],
+            seller: "OnChain Shadow",
+            network: "base"
+          }
         }
       });
     }
