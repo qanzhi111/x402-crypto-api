@@ -1,6 +1,6 @@
-# OnChain Shadow API - x402 Paid Data Service
+# x402 Crypto API - AI Agent Paid Data Service
 
-AI Agent-oriented paid API providing crypto prices, Web3 security data, and on-chain investigation reports via the x402 payment protocol.
+AI Agent-oriented paid API providing crypto prices, Web3 security data, and on-chain investigation reports via the [x402 payment protocol](https://x402.org).
 
 ## Endpoints & Pricing
 
@@ -48,6 +48,16 @@ cp .env.example .env
 # Run locally
 node server.js
 ```
+
+## Deployment
+
+This service is deployed on Railway. To deploy your own instance:
+
+1. Fork this repository
+2. Create a new Railway project
+3. Connect your GitHub repo
+4. Set the environment variable `WALLET_ADDRESS` to your Base chain wallet address
+5. Deploy!
 
 ## Revenue Potential
 
