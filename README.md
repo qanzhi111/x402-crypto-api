@@ -186,3 +186,12 @@ At $0.01-$0.25 per call:
   <strong>MCP Server powered by x402</strong><br>
   <a href="https://x402.org">x402 Protocol</a> · <a href="https://modelcontextprotocol.io">MCP Specification</a> · <a href="https://github.com/qanzhi111/x402-mcp-adapter">MCP Adapter</a>
 </p>
+
+
+## 📖 Web3 Security Investigation Guide
+
+Interested in learning how to investigate Web3 crimes? Check out our practical guide:
+
+**[Web3 Security Investigation: A Practical Guide](https://jotter767.gumroad.com/l/web3-security-investigation-guide)** — $19.99
+
+9,000+ words covering on-chain forensics methodology, three complete case studies, automated monitoring scripts, and investigation report templates.
