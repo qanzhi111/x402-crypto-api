@@ -1,18 +1,56 @@
-# x402 Crypto API
+# x402 Crypto API - MCP Server
 
+![MCP Server](https://img.shields.io/badge/MCP-Server-blue?style=flat-square)
 ![x402 Protocol](https://img.shields.io/badge/x402-Protocol-7C3AED?style=flat-square)
 ![USDC Payments](https://img.shields.io/badge/USDC-Base-0052FF?style=flat-square)
 ![Price: $0.01/req](https://img.shields.io/badge/Price-$0.01/request-10B981?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-black?style=flat-square)
 
-**AI Agent Paid Data Service** - Pay-per-request crypto prices, Web3 security data, and on-chain investigation reports via the [x402 payment protocol](https://x402.org).
+An **MCP (Model Context Protocol) server** providing crypto market data, Web3 security analysis, and on-chain investigation tools for AI agents. Built on the [x402 payment protocol](https://x402.org) — AI agents pay per request using USDC on Base, with no API keys required.
 
-## Live Demo
+## 🤖 MCP Server Configuration
 
-> **API Status**: Live at `https://spectacular-strength-production-0494.up.railway.app`
+Add to your MCP client (Claude Desktop, Cursor, etc.):
 
-## Endpoints & Pricing
+```json
+{
+  "mcpServers": {
+    "x402-crypto-api": {
+      "type": "sse",
+      "url": "https://spectacular-strength-production-0494.up.railway.app/mcp"
+    }
+  }
+}
+```
+
+### MCP Tools
+
+| Tool | Price | Description |
+|------|-------|-------------|
+| `get_crypto_price` | $0.01 | Get real-time cryptocurrency price by symbol |
+| `get_market_overview` | $0.02 | Get top 20 crypto market data (price, market cap, volume) |
+| `analyze_address` | $0.05 | Analyze an Ethereum address (balance, transactions, risk) |
+| `check_token_security` | $0.05 | Check token for rug pull/honeypot indicators |
+| `analyze_contract` | $0.10 | Smart contract risk analysis and vulnerability scan |
+| `investigate_address` | $0.25 | Full on-chain investigation report for an address |
+
+### MCP Resources
+
+- `crypto://prices` — Real-time crypto price feed
+- `crypto://market` — Market overview data
+- `security://token/{address}` — Token security data
+- `security://contract/{address}` — Contract analysis
+
+### MCP Prompts
+
+- `investigate_wallet` — Guide a full on-chain investigation of a wallet address
+- `token_safety_check` — Prompt template for checking token security
+- `market_analysis` — Analyze current crypto market conditions
+
+## 🔌 Direct API Access
+
+The MCP server also exposes a REST API for direct HTTP access:
 
 | Endpoint | Price | Description |
 |----------|-------|-------------|
@@ -31,62 +69,9 @@
 | `GET /health` | Service health check |
 | `GET /api/status` | API status and pricing |
 
-## Quick Start
+## 💰 Payment (x402 Protocol)
 
-### cURL
-
-```bash
-# Check API status (free)
-curl https://spectacular-strength-production-0494.up.railway.app/health
-
-# Get BTC price (requires x402 payment)
-curl https://spectacular-strength-production-0494.up.railway.app/api/crypto/price/BTC
-```
-
-### Python
-
-```python
-import requests
-
-# Free endpoint
-health = requests.get("https://spectacular-strength-production-0494.up.railway.app/health")
-print(health.json())
-
-# Paid endpoint (with x402 payment headers)
-headers = {
-    "X-Payment": "your-x402-payment-header"
-}
-response = requests.get(
-    "https://spectacular-strength-production-0494.up.railway.app/api/crypto/price/BTC",
-    headers=headers
-)
-print(response.json())
-```
-
-### JavaScript
-
-```javascript
-const axios = require('axios');
-
-// Free endpoint
-const health = await axios.get('https://spectacular-strength-production-0494.up.railway.app/health');
-console.log(health.data);
-
-// Paid endpoint
-const btc = await axios.get(
-  'https://spectacular-strength-production-0494.up.railway.app/api/crypto/price/BTC',
-  {
-    headers: {
-      'X-Payment': 'your-x402-payment-header'
-    }
-  }
-);
-console.log(btc.data);
-```
-
-## Payment
-
-All paid endpoints use the **x402 protocol** with **USDC on Base**.
+All paid tools and endpoints use the **x402 protocol** with **USDC on Base**. No API keys needed — the MCP client handles payment automatically.
 
 | Detail | Value |
 |--------|-------|
@@ -96,13 +81,56 @@ All paid endpoints use the **x402 protocol** with **USDC on Base**.
 
 ### How x402 Works
 
-1. Client sends request to paid endpoint
+1. Client sends request to paid tool/endpoint
 2. Server responds with `HTTP 402` + payment details
 3. Client signs USDC payment via x402
 4. Client resends request with `X-Payment` header
 5. Server verifies payment and returns data
 
-## Deployment
+## 🚀 Quick Start
+
+### Use as MCP Server
+
+Add the server config above to your MCP client, then:
+
+```
+User: What's the current price of Bitcoin?
+AI Agent: [calls get_crypto_price tool] → Bitcoin is currently at $XX,XXX
+```
+
+### Use via cURL
+
+```bash
+# Check API status (free)
+curl https://spectacular-strength-production-0494.up.railway.app/health
+
+# Get BTC price (requires x402 payment)
+curl https://spectacular-strength-production-0494.up.railway.app/api/crypto/price/BTC
+```
+
+### Use via Python
+
+```python
+import requests
+
+# Free endpoint
+health = requests.get("https://spectacular-strength-production-0494.up.railway.app/health")
+print(health.json())
+
+# Paid endpoint (with x402 payment headers)
+headers = {"X-Payment": "your-x402-payment-header"}
+response = requests.get(
+    "https://spectacular-strength-production-0494.up.railway.app/api/crypto/price/BTC",
+    headers=headers
+)
+print(response.json())
+```
+
+## 📦 MCP Adapter
+
+For environments that need a standalone MCP adapter, see [x402-mcp-adapter](https://github.com/qanzhi111/x402-mcp-adapter) — a dedicated MCP server wrapper that connects to this API.
+
+## 🛠 Deployment
 
 ### Railway (Recommended)
 
@@ -128,7 +156,7 @@ cp .env.example .env
 npm start
 ```
 
-## Revenue Potential
+## 📊 Revenue Potential
 
 At $0.01-$0.25 per call:
 
@@ -138,22 +166,23 @@ At $0.01-$0.25 per call:
 | 1,000 | $50-250 | $1,500-7,500 |
 | 10,000 | $500-2,500 | $15,000-75,000 |
 
-## Data Sources
+## 🔗 Available On
+
+- [Smithery](https://smithery.ai/server/kaitongkouzi/x402-crypto-api) — MCP server marketplace
+- [Glama](https://glama.ai/mcp/servers/qanzhi111/x402-crypto-api) — MCP server directory
+- [Agent402](https://agent402.ai) — x402 payment gateway
+- [x402Scout](https://x402scout.com) — Crypto analytics
+
+## 📄 Data Sources
 
 | Source | Data Type | Free Tier |
 |--------|-----------|-----------|
 | **CoinGecko** | Crypto prices & market data | 30 calls/min |
 | **Etherscan** | On-chain data | 100K calls/day |
 
-## Available On
-
-- [AgenticTrade](https://agentictrade.com) - AI Agent trading platform
-- [Agent402](https://agent402.ai) - x402 payment gateway
-- [x402Scout](https://x402scout.com) - Crypto analytics
-
 ---
 
 <p align="center">
-  <strong>Powered by x402</strong><br>
-  <a href="https://x402.org">x402 Protocol</a> · <a href="https://github.com/qanzhi111/x402-mcp-adapter">MCP Adapter</a>
+  <strong>MCP Server powered by x402</strong><br>
+  <a href="https://x402.org">x402 Protocol</a> · <a href="https://modelcontextprotocol.io">MCP Specification</a> · <a href="https://github.com/qanzhi111/x402-mcp-adapter">MCP Adapter</a>
 </p>
