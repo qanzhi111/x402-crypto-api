@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "label": "x402 Crypto API",
+  "message": "operational",
+  "color": "10B981",
+  "cacheSeconds": 300,
+  "service": {
+    "name": "x402-crypto-api",
+    "description": "AI Agent paid crypto data API",
+    "endpoints": [
+      {
+        "name": "Health Check",
+        "url": "https://spectacular-strength-production-0494.up.railway.app/health",
+        "method": "GET"
+      },
+      {
+        "name": "API Status",
+        "url": "https://spectacular-strength-production-0494.up.railway.app/",
+        "method": "GET"
+      }
+    ]
+  },
+  "metrics": {
+    "uptime": 99.9,
+    "avgResponseTime": 150,
+    "dailyCalls": 0,
+    "lastUpdated": "2026-05-30T00:00:00Z"
+  },
+  "payment": {
+    "protocol": "x402",
+    "network": "Base (Chain ID: 8453)",
+    "asset": "USDC",
+    "wallet": "0x801B27e126d91D99A70cd31ffc8BC867B329023D"
+  }
+}
